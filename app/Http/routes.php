@@ -29,5 +29,6 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/logout',function (){
-   //dd(Auth::guard('web')->check()) ;
+    //Auth::guard('web')->logout();
+    dd(Auth::guard('web')->check()) ;
 });

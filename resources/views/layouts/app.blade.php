@@ -39,8 +39,9 @@
                          <img  width="64" hieght="60" src="http://bootsnipp.com/img/avatars/ebeb306fd7ec11ab68cbcaa34282158bd80361a7.jpg">
                     </a>
                     <div class="user-name">
-                         <h5><a href="#">Alireza Zare</a></h5>
-                         <span><a href="#">Info.Ali.Pci@Gmail.com</a></span>
+                         <h5><a href="#">{{ @Auth::guard('web')->user()->name  }}</a></h5>
+                         <span><a href="#">{{ @Auth::guard('web')->user()->email }}</a></span><br/>
+                         <span><a href="{{Url('/')}}/logout">Logout</a></span>
                     </div>
                     <a class="mail-dropdown pull-right" href="javascript:;">
                          <i class="fa fa-chevron-down"></i>
