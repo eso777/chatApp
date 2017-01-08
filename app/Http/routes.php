@@ -11,7 +11,7 @@ Route::post('admin/login','LoginCtrl@postAdminLogin');
 Route::get('admin/logout','LoginCtrl@getLogout');
 
 Route::Auth() ;
-Route::resource('/','HomeController@index');
+//Route::resource('/','HomeController@index');
 Route::group(['prefix' => 'admin','middleware'=>'AdminAuth'], function() {
 /* Login admin routes*/
 	
@@ -24,11 +24,20 @@ Route::group(['prefix' => 'admin','middleware'=>'AdminAuth'], function() {
 });
 
 
-Route::auth();
+//Route::auth();
+
+Route::group(['middleware'=>'auth'], function() {
+
+    Route::resource('/','HomeController@index');
+
+});
+
+
 
 Route::get('/home', 'HomeController@index');
 
 Route::get('/logout',function (){
-    //Auth::guard('web')->logout();
-    dd(Auth::guard('web')->check()) ;
+    Auth::guard('web')->logout();
+    //dd(Auth::guard('web')->check()) ;
+    return redirect()->to(Url('/')) ;
 });

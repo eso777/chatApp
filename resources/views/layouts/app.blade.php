@@ -169,10 +169,8 @@
                     </form>
                </div>
                <div class="inbox-body">
-
-                @yield('content')
-               {{--
-                    <div class="mail-option">
+                    @yield('content')
+               {{--<div class="mail-option">
                          <div class="chk-all">
                               <input type="checkbox" class="mail-checkbox mail-group-checkbox">
                               <div class="btn-group">
