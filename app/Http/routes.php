@@ -6,10 +6,12 @@ use App\admin ;
 /***************************************/
 
 /* Login admin routes*/
+/* Login admin routes*/
 Route::get('admin/login','LoginCtrl@showAdminLogin');
 Route::post('admin/login','LoginCtrl@postAdminLogin');
 Route::get('admin/logout','LoginCtrl@getLogout');
 
+Route::post('saveInfoAdmin','LoginCtrl@saveAdminInfo');
 Route::Auth() ;
 //Route::resource('/','HomeController@index');
 Route::group(['prefix' => 'admin','middleware'=>'AdminAuth'], function() {
@@ -29,6 +31,13 @@ Route::group(['prefix' => 'admin','middleware'=>'AdminAuth'], function() {
 Route::group(['middleware'=>'auth'], function() {
 
     Route::resource('/','HomeController@index');
+
+    // Start Rooms Routes
+    Route::get('newRoom','RoomsCtrl@getViewAddRoom');
+    Route::post('newRoom','RoomsCtrl@postViewAddRoom');
+    Route::get('myRooms','RoomsCtrl@getMyRooms');
+    Route::get('allRooms','RoomsCtrl@getallRooms');
+    // Start Rooms Routes
 
 });
 

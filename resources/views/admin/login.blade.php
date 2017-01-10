@@ -1,94 +1,126 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {!! Html::style("assets/global/plugins/font-awesome/css/font-awesome.min.css") !!}
+    {!! Html::style("assets/global/plugins/simple-line-icons/simple-line-icons.min.css") !!}
+    {!! Html::style("assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css") !!}
+    <style type="text/css">
 
-<html lang="en" dir="rtl">
-    
-    <head>
-        <meta charset="utf-8" />
-        <title>Metronic | User Lock Screen 1</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="" name="description" />
-        <meta content="" name="author" />
-        <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
-        <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/global/plugins/bootstrap/css/bootstrap-rtl.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
-        <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN THEME GLOBAL STYLES -->
-        <link href="../assets/global/css/components-rtl.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="../assets/global/css/plugins-rtl.min.css" rel="stylesheet" type="text/css" />
-        <!-- END THEME GLOBAL STYLES -->
-        <!-- BEGIN PAGE LEVEL STYLES -->
-        <link href="../assets/pages/css/lock-rtl.min.css" rel="stylesheet" type="text/css" />
-        <!-- END PAGE LEVEL STYLES -->
-        <!-- BEGIN THEME LAYOUT STYLES -->
-        <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" /> </head>
-        <!-- END HEAD -->
+        /* Credit to bootsnipp.com for the css for the color graph */
+        .colorgraph {
+            height: 5px;
+            border-top: 0;
+            background: #c4e17f;
+            border-radius: 5px;
+            background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+            background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        }
+    </style>
+</head>
 
-    <body class="">
-        <div class="page-lock">
-            <div class="page-logo">
-                <a class="brand" href="index.html">
-                    <img src="../assets/pages/img/logo-big.png" alt="logo" /> </a>
+<div class="container">
+    <div class="row">
+        {{-- @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-            <div class="page-body">
-                
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+        @endif --}}
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            @if (!App\admin::all()->count() > 0)
+                {!! Form::open(['method' => 'POST', 'url' => 'saveInfoAdmin', 'class' => 'form-horizontal']) !!}
+                <h2>Welcome To <small> Admin Panel .</small></h2>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-6 col-md-6">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            {!! Form::text('name', null, ['class' => 'form-control input-lg','placeholder'=>"First Name"]) !!}
+                            <small class="text-danger">{{ $errors->first('name') }}</small>
+                        </div>
                     </div>
-                @endif
+                </div>
 
-                {!! Form::open(['style'=>'padding:50px']) !!}
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        {!! Form::label('email', 'E-mail') !!}
-                        {!! Form::text('email', null, ['class' => 'form-control', 'required' => 'required']) !!}
-                        <small class="text-danger">{{ $errors->first('email') }}</small>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-6 col-md-6">
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            {!! Form::text('email', null, ['class' => 'form-control input-lg','placeholder'=>"Email Address"]) !!}
+                            <small class="text-danger">{{ $errors->first('email') }}</small>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        {!! Form::label('password', 'Password') !!}
-                        {!! Form::password('password', ['class' => 'form-control', 'required' => 'required']) !!}
-                        <small class="text-danger">{{ $errors->first('password') }}</small>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-6 col-md-6">
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            {!! Form::password('password',['class' => 'form-control input-lg','placeholder'=>"password"]) !!}
+                            <small class="text-danger">{{ $errors->first('password') }}</small>
+                        </div>
                     </div>
+                </div>
 
-                    {!! Form::submit('Login', ['class' => 'btn btn-info pull-right']) !!}
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 pull-right">
+                        <button type="submit" class='btn btn-primary btn-block btn-lg '>
+                            <i class="fa fa-registered" aria-hidden="true"></i>
+                            Register
+                        </button>
+                    </div>
+                </div>
+
                 {!! Form::close() !!}
+            @else
+                <br /><div class="row">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+                <h2>Welcome To <small> Admin Panel .</small></h2>
+                <hr class="colorgraph">
+                {!! Form::open(['method' => 'POST', 'url' => 'admin/login', 'class' => 'form-horizontal']) !!}
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 
+                    {!! Form::text('email', null, ['class' => 'form-control input-lg','placeholder'=>'Email Address']) !!}
+                    <small class="text-danger">{{ $errors->first('email') }}</small>
+                </div>
 
-            </div>
-            <div class="page-footer-custom"> 2014 &copy; Metronic. Admin Dashboard Template. </div>
+                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+
+                    {!! Form::password('password', ['class' => 'form-control input-lg','placeholder'=>'Password']) !!}
+                    <small class="text-danger">{{ $errors->first('password') }}</small>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 pull-right">
+                        <button type="submit" class='btn btn-primary btn-block btn-lg'>
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> Login
+                        </button>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+                <hr class="colorgraph">
+            @endif
         </div>
-        <!--[if lt IE 9]>
-<script src="../assets/global/plugins/respond.min.js"></script>
-<script src="../assets/global/plugins/excanvas.min.js"></script> 
-<![endif]-->
-        <!-- BEGIN CORE PLUGINS -->
-        <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
-        <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="../assets/pages/scripts/lock.min.js" type="text/javascript"></script>
-        <!-- END PAGE LEVEL SCRIPTS -->
-        <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <!-- END THEME LAYOUT SCRIPTS -->
-    </body>
+    </div>
 
+
+</div>
+
+
+</body>
 </html>
+
